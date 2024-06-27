@@ -1,24 +1,32 @@
 from __future__ import annotations
-from exceptions import DATFileRequired
 
 import argparse
 import os
-import re
-import simulation_model
-import vpython
 import random
+import re
 
-def update_carbon_atoms()-> None:
+import vpython
+
+import simulation_model
+from exceptions import DATFileRequired
+
+
+def update_carbon_atoms() -> None:
     for index, carbon in enumerate(ALL_CARBON_VPYTHON_OBJECTS):
         carbon.pos = vpython.vector(*SIMULATION[index])
 
-def initialise_vpython()-> None:
+
+def initialise_vpython() -> None:
     for i in range(60):
         ALL_CARBON_VPYTHON_OBJECTS.append(
-            vpython.sphere(radius=0.1, color=vpython.vector(random.random(), random.random(), random.random()), opacity=0.2)
-        )
+            vpython.sphere(radius=0.1,
+                           color=vpython.vector(random.random(),
+                                                random.random(),
+                                                random.random()),
+                           opacity=0.2))
         ALL_CARBON_VPYTHON_OBJECTS[i].pos = vpython.vector(*SIMULATION[i])
     SIMULATION.time += 1
+
 
 def run_simulation():
 
@@ -27,16 +35,20 @@ def run_simulation():
         update_carbon_atoms()
         SIMULATION.time += 1
 
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('coordinates.dat', help='Provide the .dat file with coordinates data for the carbon atoms')
+    parser.add_argument(
+        'coordinates.dat',
+        help='Provide the .dat file with coordinates data for the carbon atoms'
+    )
     args = parser.parse_args()
-    
+
     fileName = vars(args)['coordinates.dat']
     if not os.path.exists(fileName):
         raise FileNotFoundError("File not found")
-    
+
     if not re.match(r'.*\.dat', fileName):
         raise DATFileRequired('.dat file required error')
 
