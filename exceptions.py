@@ -1,0 +1,3 @@
+class DATFileRequired(Exception):
+    pass
+

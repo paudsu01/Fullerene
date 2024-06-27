@@ -21,8 +21,8 @@ class Simulation:
 
     def __process_data(self, raw_data: List) -> None:
         self.__data = []
-        for rows in raw_data:
-            self.__data.append([float(i) for i in rows.strip().split()])
+        for row in raw_data:
+            self.__data.append([float(i) for i in row.strip().split()])
         
     # simulation[0] gives coordinates of the first carbon atom
     # simulation[1] gives coordinates of the second carbon atom
@@ -34,6 +34,4 @@ class Simulation:
         if type(index) != int:
             raise TypeError("Integer expected for indexing")
         
-
         return (row[realIndex], row[realIndex+1], row[realIndex +2])
-
