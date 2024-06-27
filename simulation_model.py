@@ -37,3 +37,6 @@ class Simulation:
             raise TypeError("Integer expected for indexing")
 
         return (row[realIndex], row[realIndex + 1], row[realIndex + 2])
+
+    def actual_time(self):
+        return self.data[self.time][-1]

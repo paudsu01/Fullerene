@@ -24,15 +24,20 @@ def initialise_vpython() -> None:
                                                 random.random(),
                                                 random.random()),
                            opacity=0.2))
-        ALL_CARBON_VPYTHON_OBJECTS[i].pos = vpython.vector(*SIMULATION[i])
-    SIMULATION.time += 1
+        try:
+            ALL_CARBON_VPYTHON_OBJECTS[i].pos = vpython.vector(*SIMULATION[i])
+        except IndexError:
+            raise IndexError(".DAT file doesn't have 181 columns")
 
+    vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)'
+    SIMULATION.time += 1
 
 def run_simulation():
 
     while True:
         vpython.rate(25)
         update_carbon_atoms()
+        vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)'
         SIMULATION.time += 1
 
 
