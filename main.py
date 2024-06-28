@@ -19,6 +19,7 @@ def update_carbon_atoms() -> None:
 
 
 def initialise_vpython() -> None:
+
     for i in range(60):
         ALL_CARBON_VPYTHON_OBJECTS.append(
             vpython.sphere(radius=0.1,
@@ -73,7 +74,7 @@ def run_simulation() -> None:
     current_trajectory = 1
     previous_time = SIMULATION.actual_time
 
-    while SIMULATION.time < len(SIMULATION.data):
+    while SIMULATION.time < len(SIMULATION.data) and not config.SIMULATION_ENDED:
         vpython.rate(20)
 
         if not config.SIMULATION_PAUSED:
