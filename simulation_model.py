@@ -38,5 +38,6 @@ class Simulation:
 
         return (row[realIndex], row[realIndex + 1], row[realIndex + 2])
 
+    @property
     def actual_time(self):
         return self.data[self.time][-1]
