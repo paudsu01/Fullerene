@@ -75,7 +75,7 @@ def run_simulation() -> None:
     previous_time = SIMULATION.actual_time
 
     while SIMULATION.time < len(SIMULATION.data) and not config.SIMULATION_ENDED:
-        vpython.rate(20)
+        vpython.rate(config.SIMULATION_RATE)
 
         if not config.SIMULATION_PAUSED:
             # Determine if we are in a new trajectory
