@@ -33,21 +33,30 @@ def initialise_vpython() -> None:
 
     buttons.initialise_buttons()
 
-    vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)</b>'
-    SIMULATION.time += 1
+    vpython.scene.title = f'Trajectory= <b>1</b>\tTime = <b>{SIMULATION.actual_time:.4f} femtosecond(s)</b>'
 
+def end_simulation() -> None:
 
-def end_simulation():
+    config.SIMULATION_ENDED = True
     buttons.disable_buttons()
 
-def run_simulation():
+def run_simulation() -> None:
+
+    current_trajectory = 1
+    previous_time = SIMULATION.actual_time
 
     while SIMULATION.time < len(SIMULATION.data):
         vpython.rate(20)
 
         if not config.SIMULATION_PAUSED:
+            # Determine if we are in a new trajectory
+            if SIMULATION.actual_time < previous_time:
+                current_trajectory += 1
+
             update_carbon_atoms()
-            vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)'
+            vpython.scene.title = f'Trajectory= <b>{current_trajectory}</b>\tTime = <b>{SIMULATION.actual_time:.4f} femtosecond(s)</b>'
+
+            previous_time = SIMULATION.actual_time
             SIMULATION.time += 1
 
     end_simulation()
