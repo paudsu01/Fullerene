@@ -39,6 +39,34 @@ def end_simulation() -> None:
 
     config.SIMULATION_ENDED = True
     buttons.disable_buttons()
+    show_restart_button()
+
+def restart_simulation(evt: vpython.vpython.button)-> None:
+
+    # Delete restart button
+    evt.delete()
+
+    # Reset simulation time to 0
+    SIMULATION.time = 0
+
+    buttons.enable_buttons()
+    vpython.scene.title = f'Trajectory= <b>1</b>\tTime = <b>{SIMULATION.actual_time:.4f} femtosecond(s)</b>'
+    update_carbon_atoms()
+
+    # Pause the simulation at the beginning
+    config.SIMULATION_PAUSED = False
+    buttons.run_pause_simulation(buttons.run_pause_button)
+
+    # Allow the start_simulation function to be executed
+    config.SIMULATION_ENDED = False
+
+
+def show_restart_button():
+    
+    vpython.button(bind=restart_simulation,
+                   text='Restart simulation',
+                   background=vpython.color.magenta,
+                   pos=vpython.scene.title_anchor)
 
 def run_simulation() -> None:
 

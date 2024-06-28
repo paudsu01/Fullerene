@@ -17,3 +17,6 @@ def run_pause_simulation(event : vpython.vpython.button) -> None:
 
 def disable_buttons() -> None:
     run_pause_button.disabled = True
+
+def enable_buttons() -> None:
+    run_pause_button.disabled = False
