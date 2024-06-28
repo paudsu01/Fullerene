@@ -6,6 +6,8 @@ import random
 import re
 
 import vpython
+import config
+import buttons
 
 import simulation_model
 from exceptions import DATFileRequired
@@ -29,17 +31,26 @@ def initialise_vpython() -> None:
         except IndexError:
             raise IndexError(".DAT file doesn't have 181 columns")
 
+    buttons.initialise_buttons()
+
     vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)</b>'
     SIMULATION.time += 1
+
+
+def end_simulation():
+    buttons.disable_buttons()
 
 def run_simulation():
 
     while SIMULATION.time < len(SIMULATION.data):
         vpython.rate(20)
-        update_carbon_atoms()
-        vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)'
-        SIMULATION.time += 1
 
+        if not config.SIMULATION_PAUSED:
+            update_carbon_atoms()
+            vpython.scene.title = f'Time = <b>{SIMULATION.actual_time:.4f} femtosecond(s)'
+            SIMULATION.time += 1
+
+    end_simulation()
 
 if __name__ == '__main__':
 
@@ -63,4 +74,9 @@ if __name__ == '__main__':
     ALL_CARBON_VPYTHON_OBJECTS = []
 
     initialise_vpython()
-    run_simulation()
+
+    ## KEEP THIS LOOP RUNNING FOR VPYTHON TO BE RESPONSIVE EVEN AFTER SIMULATION ENDS ##
+    while True:
+        vpython.rate(5)
+        if not config.SIMULATION_ENDED:
+            run_simulation()
