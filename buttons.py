@@ -18,7 +18,7 @@ def initialise_buttons() -> None:
     speed_slider = vpython.slider(bind=change_simulation_rate,
                                   value=config.SIMULATION_RATE,
                                   min=1,
-                                  max=40)
+                                  max=400)
 
     speed_w_text = vpython.wtext(text=config.SIMULATION_RATE)
 

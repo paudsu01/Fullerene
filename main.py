@@ -22,7 +22,7 @@ def initialise_vpython() -> None:
 
     for i in range(60):
         ALL_CARBON_VPYTHON_OBJECTS.append(
-            vpython.sphere(radius=0.1,
+            vpython.sphere(radius=0.3,
                            color=vpython.vector(random.random(),
                                                 random.random(),
                                                 random.random()),
