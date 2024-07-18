@@ -3,6 +3,7 @@ from typing import List, Tuple
 
 import argparse
 import exceptions
+import matplotlib.pyplot as plt
 import re
 import os
 
@@ -10,7 +11,10 @@ import os
 # I need a file for either one of (x,y,z coordinate) and total bond energy for 'c' for that coordinate and pass it as an argument (required)
 
 def plot_graph(x: List[float], y: List[float], initial_x: float, initial_y: float) -> None:
-    pass
+
+    plt.plot(x, y, 'ro')
+    plt.plot(initial_x, initial_y, 'bo')
+    plt.show()
 
 def process_file(file : str) -> Tuple[float]:
 
@@ -44,7 +48,7 @@ if __name__ == '__main__':
     parser.add_argument('file.dat', help='Provide a file with the 1st column: x coordinate, 2nd column: bond energy')
     args = parser.parse_args()
 
-    pattern = re.compile(r'.*\.dat')
+    pattern = re.compile(r'.*\.(dat|DAT)')
     if pattern.match(vars(args)['file.dat']):
         x_values, y_values, initial_x, initial_y = process_file(vars(args)['file.dat'])
         plot_graph(x_values, y_values, initial_x, initial_y)
