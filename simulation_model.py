@@ -24,6 +24,7 @@ class Simulation:
     def __process_data(self, raw_data: List) -> None:
         self.__data = []
         for row in raw_data:
+            if len(row.strip().split()) == 0: continue
             self.__data.append([float(i) for i in row.strip().split()])
 
     # simulation[0] gives coordinates of the first carbon atom
