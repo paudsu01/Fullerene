@@ -43,13 +43,16 @@ def plot_graphs(*datasets):
         axs[index].set_ylabel("Total Bond energy")
         axs[index].scatter(x[0], y[0])
     plt.tight_layout()
-    plt.show()
+    return fig
 
 def main(carbon: int, file : str) -> None:
 
     line_numbers = lambda carbon_id : (1203 * (carbon_id-2), 1203 * (carbon_id-1))
     x_data, y_data, z_data = parse_data(file, *line_numbers(carbon))
-    plot_graphs(x_data, y_data, z_data)
+    fig = plot_graphs(x_data, y_data, z_data)
+
+    fileName = os.path.join(os.path.dirname(__file__), f'images/carbon-{carbon}.png')
+    fig.savefig(fileName)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
