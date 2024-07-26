@@ -2,5 +2,6 @@
 **.swp
 **__pycache__/
 **.dat
+!sample/*.dat
 .DS_Store
 **/images/
