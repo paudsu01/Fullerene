@@ -18,6 +18,14 @@ def update_carbon_atoms() -> None:
         carbon.pos = vpython.vector(*SIMULATION[index])
 
 
+def add_help_to_canvas() -> None:
+    vpython.scene.append_to_caption(
+                '\n\n\n\t<b>HELP/TIPS</b>:\n\nResize canvas by placing mouse at the egde of the canvas\n\n\t<b>Touchpad</b>:\nZoom in/out : Place two fingers on touchpad and move up/down\nRotate "camera" to view scene : Place two fingers on touchpad and press and move \nPan camera : Shift + press touchpad and move'
+                    )
+    vpython.scene.append_to_caption(
+                    '\n\n\t<b>Mouse</b>:\nRight button drag or Ctrl-drag to rotate "camera" to view scene.\nTo zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.\nOn a two-button mouse, middle is left + right.\nShift-drag to pan left/right and up/down.\nTouch screen: pinch/extend to zoom, swipe or two-finger rotate\n'
+                        )
+
 def initialise_vpython() -> None:
 
     for i in range(60):
@@ -112,6 +120,7 @@ if __name__ == '__main__':
     ALL_CARBON_VPYTHON_OBJECTS = []
 
     initialise_vpython()
+    add_help_to_canvas()
 
     ## KEEP THIS LOOP RUNNING FOR VPYTHON TO BE RESPONSIVE EVEN AFTER SIMULATION ENDS ##
     while True:
