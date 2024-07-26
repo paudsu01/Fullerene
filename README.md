@@ -85,7 +85,7 @@ Inside the `sample` folder, there is one file : `coordinates.dat`. You can try u
 python3 main.py sample/coordinates.dat
 ```
 ## Other resources
-Navigate to the `misc` folder and you will find a guide for other supported resources.
+Navigate to the `misc` folder and you will find small python programs and bash scripts related to the fullerene molecule.
 
 ## Why open source ?
 
